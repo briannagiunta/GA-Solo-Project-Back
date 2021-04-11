@@ -4,6 +4,8 @@ const userRoutes = express.Router();
 
 userRoutes.post('/', userController.signUp)
 userRoutes.post('/login', userController.login)
+userRoutes.get('/profile', userController.getUserProfile)
+userRoutes.put('/save', userController.saveCocktail)
 
 
 
