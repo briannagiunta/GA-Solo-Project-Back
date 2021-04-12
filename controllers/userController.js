@@ -70,6 +70,26 @@ userController.getUserProfile = async (req, res) => {
     }
 }
 
+userController.saveAddedCocktail = async (req,res) => {
+  try {
+      const user = await models.user.findOne({
+          where:{
+              id: req.body.userId
+          }
+      })
+      const cocktail = await models.addedCocktail.findOne({
+          where:{
+              id: req.body.drinkId
+          }
+      })
+      const newAssociation = await user.addAddedCocktail(cocktail)
+      res.json({message: 'user saved addedcocktail', newAssociation})
+  } catch (error) {
+      res.json({error})
+  }
+}
+
+
 
 
 module.exports = userController;

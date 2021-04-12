@@ -14,5 +14,7 @@ app.listen(PORT, () => {
 
 const userRoutes = require('./routes/userRoutes')
 const cocktailRoutes = require('./routes/cocktailRoutes')
+const addedCocktailRoutes = require('./routes/addedCocktailRoutes')
 app.use('/users', userRoutes)
 app.use('/cocktails', cocktailRoutes)
+app.use('/addedCocktails', addedCocktailRoutes)
