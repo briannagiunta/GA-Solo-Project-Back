@@ -26,21 +26,41 @@ addedCocktailController.getAdded = async (req,res) => {
         let response = []
       const userCocktails = await models.userAddedCocktail.findAll()
       const allAddedCocktails = await models.addedCocktail.findAll()
-    //   console.log(userCocktails.addedCocktailId);
+      const userId = req.body.userId
       userCocktails.forEach((added) => {
-          const associationId = added.addedCocktailId
-          allAddedCocktails.forEach((drink) => {
+            const associationId = added.addedCocktailId
+            const user = added.userId
+            allAddedCocktails.forEach((drink) => {
               const cocktailId = drink.id
-              if(associationId === cocktailId){
+              if(associationId === cocktailId && user == userId){
                   response.push(drink)
               }
           })
       })
       res.json(response)
     } catch (error) {
-      console.log(error);
+      res.json({error});
     }
-  
+  }
+
+
+  addedCocktailController.delete = async (req,res) => {
+      try {
+          let user = await models.user.findOne({
+              where:{
+                  id: req.params.userId
+              }
+          })
+          let addedCocktail = await models.addedCocktail.findOne({
+              where:{
+                  id: req.params.drinkId
+              }
+          })
+          await user.removeAddedCocktail(addedCocktail)
+          res.json({message: 'deleted'})
+      } catch (error) {
+          
+      }
   }
 
 

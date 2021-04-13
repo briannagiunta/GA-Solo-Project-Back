@@ -3,7 +3,8 @@ const express = require('express');
 const cocktailRoutes = express.Router();
 
 cocktailRoutes.post('/', cocktailController.addOne);
-cocktailRoutes.get('/saved', cocktailController.getSaved)
+cocktailRoutes.put('/saved', cocktailController.getSaved)
+cocktailRoutes.delete('/:userId/delete/:drinkId', cocktailController.delete)
 
 
 
