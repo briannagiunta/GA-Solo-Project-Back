@@ -26,6 +26,7 @@ userController.login = async (req,res) => {
           email: req.body.email
         }
       })
+      console.log(user + "this is user line 29");
       if(user.password === req.body.password){
         res.json({message: 'login successful', user: user})
       }else{
